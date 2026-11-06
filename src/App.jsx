@@ -13,16 +13,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/tentang',
-    element: <Tentang />,
-    children: [
-      {
-        path: '/',
-        element: <Beranda />,
-      },
-    ],
-  },
 ]);
 
 export default function App() {
