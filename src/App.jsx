@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Beranda from './pages/Berandaa';
 import Tentang from './components/Tentang';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -8,8 +9,13 @@ const router = createBrowserRouter([
     element: <Beranda />,
     children: [
       {
-        path: 'tentang',
-        element: <Tentang />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: 'tentang',
+            element: <Tentang />,
+          },
+        ],
       },
     ],
   },
