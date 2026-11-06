@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function Beranda() {
   const [hitung, setHitung] = useState(() => {
     const tersimpan = localStorage.getItem('jumlah_klik');
-    return tersimpan ? parseInt(tersimpan) : 0;
+    const angka = tersimpan ? parseInt(tersimpan) : 0;
+
+    return isNaN(angka) ? 0 : angka;
   });
 
   useEffect(() => {
@@ -12,22 +14,32 @@ export default function Beranda() {
   }, [hitung]);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold text-sky-400 mb-2">🏠 Beranda</h1>
-      <p className="text-slate-400 text-lg mb-6">Kamu sudah mengklik sebanyak: {hitung} kali</p>
-      
-      <button 
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900 p-4 text-white">
+      <h1 className="mb-2 text-3xl font-bold text-sky-400">Beranda</h1>
+      <p className="mb-6 text-lg text-slate-400">
+        Kamu sudah mengklik sebanyak: {hitung} kali
+      </p>
+
+      <button
         onClick={() => setHitung(hitung + 1)}
-        className="bg-sky-500 hover:bg-sky-600 font-semibold px-6 py-2 rounded-lg mb-6 transition-colors shadow-lg"
+        className="mb-6 rounded-lg bg-sky-500 px-6 py-2 font-semibold shadow-lg transition-colors hover:bg-sky-600 block"
       >
         Tambah Angka
-      </button>
-      
-      <Link to="/tentang">
-        <button className="bg-slate-800 text-slate-400 px-4 py-1.5 rounded-lg text-sm border border-slate-700">
-          Ke Halaman Tentang
-        </button>
-      </Link>
+      </button><br />
+
+      <Link
+        to="/tentang"
+        className="rounded-lg border border-slate-700 bg-slate-800 px-4 py-1.5 text-sm text-slate-400 transition hover:bg-slate-700"
+      >
+        Ke Halaman Tentang
+      </Link><br />
+
+      <div className="mt-8 w-full max-w-md rounded-lg border border-dashed border-sky-500 p-4">
+        <p className="mb-2 text-xs text-sky-400">
+          [Wilayah Konten Anak / Outlet]
+        </p>
+        <Outlet />
+      </div>
     </div>
   );
 }

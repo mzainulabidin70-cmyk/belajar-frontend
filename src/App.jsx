@@ -6,10 +6,22 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Beranda />,
+    children: [
+      {
+        path: 'tentang',
+        element: <Tentang />,
+      },
+    ],
   },
   {
     path: '/tentang',
     element: <Tentang />,
+    children: [
+      {
+        path: '/',
+        element: <Beranda />,
+      },
+    ],
   },
 ]);
 
